@@ -4,21 +4,17 @@ import bcrypt from 'bcrypt'
 class UserController {
   async saveUser(req, res) {
     try {
-      const { name, email, password } = req.body
+      const { name, email_user, password } = req.body
 
-      if (!name || !email || !password) throw { msg: 'BAD REQUEST', status: 500 }
+      if (!name || !email_user || !password) throw { msg: 'BAD REQUEST', status: 500 }
 
       const cryptPassword = await bcrypt.hash(password, 10)
 
-      console.log(cryptPassword)
-
       const user = await User.create({
         name,
-        email,
+        email_user,
         password: cryptPassword
       })
-
-      console.log(user)
 
       res.status(201).json({
         message: 'CREATED',

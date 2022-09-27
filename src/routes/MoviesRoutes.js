@@ -1,10 +1,11 @@
 import express from 'express'
 import MovieController from '../controllers/MovieController.js'
+import Auth from '../middlewares/Auth.js'
 
 const router = express.Router()
 
-router.get('/movies-list', MovieController.moviesList)
-router.post('/favorite-movie', MovieController.favoriteMovie)
-router.get('/favorites-list', MovieController.getFavoriteMoviesList)
+router.get('/movies-list', Auth.verify, MovieController.moviesList)
+router.post('/favorite-movie', Auth.verify, MovieController.favoriteMovie)
+router.get('/favorites-list', Auth.verify, MovieController.getFavoriteMoviesList)
 
 export default router

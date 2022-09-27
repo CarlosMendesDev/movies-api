@@ -2,7 +2,7 @@ import sequelize from '../config/sequelize.js'
 import { DataTypes } from 'sequelize'
 
 const User = sequelize.define('User', {
-  email: {
+  email_user: {
     type: DataTypes.STRING,
     allowNull: false,
     primaryKey: true

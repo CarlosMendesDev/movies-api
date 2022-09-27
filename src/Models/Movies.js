@@ -14,6 +14,10 @@ const Movie = sequelize.define('Movie', {
   genres: {
     type: DataTypes.JSON,
     allowNull: false
+  },
+  email_user: {
+    type: DataTypes.STRING,
+    allowNull: false,
   }
 }, {})
 

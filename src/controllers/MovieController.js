@@ -22,13 +22,15 @@ class MovieController {
   async favoriteMovie(req, res) {
     try {
       const { movie_id } = req.body
+      const { email_user } = req.decoded
 
       const { data: movieDetails, status } = await apiTMDB.get(`/movie/${movie_id}?api_key=${process.env.API_KEY}&language=pt-BR`)
 
       const movie = await Movie.create({
         movie_id: movieDetails.id,
         title: movieDetails.title,
-        genres: movieDetails.genres
+        genres: movieDetails.genres,
+        email_user,
       })
 
       res.status(201).json({
@@ -42,7 +44,9 @@ class MovieController {
 
   async getFavoriteMoviesList(req, res) {
     try {
-      const movies = await Movie.findAll()
+      const { email_user } = req.body
+
+      const movies = await Movie.findAll({ email_user })
 
       res.status(200).json({ movies })
     } catch (error) {
