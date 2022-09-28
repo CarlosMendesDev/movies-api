@@ -6,7 +6,7 @@ class UserController {
     try {
       const { name, email_user, password } = req.body
 
-      if (!name || !email_user || !password) throw { msg: 'BAD REQUEST', status: 500 }
+      if (!name || !email_user || !password) throw { msg: 'BAD REQUEST: required parameters {email, name, password}', status: 500 }
 
       const cryptPassword = await bcrypt.hash(password, 10)
 

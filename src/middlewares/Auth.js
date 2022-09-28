@@ -7,6 +7,8 @@ class Auth {
 
       const [_, token] = authorization.split(' ')
 
+      if (!token) throw { msg: 'NOT AUTHORIZATION', status: 401 }
+
       const isValidToken = jwt.verify(token, process.env.JWT_KEY)
 
       if(!isValidToken) throw { msg: 'NOT AUTHORIZATION', status: 401 }
